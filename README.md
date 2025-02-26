@@ -1,87 +1,107 @@
-🌐 Network Monitoring Web App
+# Network Monitoring Web App
 
-A web-based network monitoring system that tracks ISP (Internet Service Provider) statuses in real time. It stores network details, downtime history, and provides insights for Airtel, BSNL, Jio, and PGCL connections.
+A web-based system designed to monitor the real-time status of Internet Service Providers (ISPs) such as Airtel, BSNL, Jio, and PGCL. This app stores network details, tracks downtime history, and provides actionable insights for network administrators.
 
+---
 
-📌 Features
+## 🚀 Features
 
-✅ Track ISP Status: Monitor Airtel, BSNL, Jio, PGCL network health.
-✅ Database Storage: Logs network IP, bandwidth, status, and downtime duration.
-✅ Downtime Logging: Records service provider outages with timestamps.
-✅ Real-time Monitoring: Enables network administrators to assess uptime & failures.
-✅ Secure API Access: Uses authentication tokens for data access.
+- **Track ISP Status**: Monitor the health of Airtel, BSNL, Jio, and PGCL networks in real time.
+- **Database Storage**: Log network IPs, bandwidth usage, status updates, and downtime durations.
+- **Downtime Logging**: Record outages with precise timestamps for analysis.
+- **Real-time Monitoring**: Assess uptime and failures dynamically.
+- **Secure API Access**: Authentication tokens ensure secure data access.
 
+---
 
-🛠️ Database Setup
-1️⃣ Create Database
+## 🛠️ Database Setup
 
-CREATE DATABASE networkiocl;
-USE networkiocl;
+1. **Create Database**
+   ```sql
+   CREATE DATABASE networkiocl;
+   USE networkiocl;
+   ```
 
-2️⃣ Create Network Monitoring Table
+2. **Create Network Monitoring Table**
+   ```sql
+   CREATE TABLE network (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       location VARCHAR(255) NOT NULL,
+       router_ip VARCHAR(15) NOT NULL,
+       airtel_ip VARCHAR(15),
+       airtel_bandwidth VARCHAR(10),
+       airtel_status ENUM('Up', 'Down') DEFAULT 'Up',
+       airtel_status_since DATETIME DEFAULT NULL,
+       bsnl_ip VARCHAR(15),
+       bsnl_bandwidth VARCHAR(10),
+       bsnl_status ENUM('Up', 'Down') DEFAULT 'Up',
+       bsnl_status_since DATETIME DEFAULT NULL,
+       jio_ip VARCHAR(15),
+       jio_bandwidth VARCHAR(10),
+       jio_status ENUM('Up', 'Down') DEFAULT 'Up',
+       jio_status_since DATETIME DEFAULT NULL,
+       pgcil_ip VARCHAR(15),
+       pgcil_bandwidth VARCHAR(10),
+       pgcil_status ENUM('Up', 'Down') DEFAULT 'Up',
+       pgcil_status_since DATETIME DEFAULT NULL,
+       token VARCHAR(32) NOT NULL
+   );
+   ```
 
-CREATE TABLE network (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    location VARCHAR(255) NOT NULL,
-    router_ip VARCHAR(15) NOT NULL,
-    airtel_ip VARCHAR(15),
-    airtel_bandwidth VARCHAR(10),
-    airtel_status ENUM('Up', 'Down') DEFAULT 'Up',
-    airtel_status_since DATETIME DEFAULT NULL,
-    bsnl_ip VARCHAR(15),
-    bsnl_bandwidth VARCHAR(10),
-    bsnl_status ENUM('Up', 'Down') DEFAULT 'Up',
-    bsnl_status_since DATETIME DEFAULT NULL,
-    jio_ip VARCHAR(15),
-    jio_bandwidth VARCHAR(10),
-    jio_status ENUM('Up', 'Down') DEFAULT 'Up',
-    jio_status_since DATETIME DEFAULT NULL,
-    pgcil_ip VARCHAR(15),
-    pgcil_bandwidth VARCHAR(10),
-    pgcil_status ENUM('Up', 'Down') DEFAULT 'Up',
-    pgcil_status_since DATETIME DEFAULT NULL,
-    token VARCHAR(32) NOT NULL
-);
+3. **Create Downtime Tracking Table**
+   ```sql
+   CREATE TABLE downtime (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       service_provider VARCHAR(50) NOT NULL,
+       downtime_duration VARCHAR(50) NOT NULL,
+       recorded_at DATETIME DEFAULT CURRENT_TIMESTAMP
+   );
+   ```
 
-3️⃣ Create Downtime Tracking Table
+---
 
-CREATE TABLE downtime (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    service_provider VARCHAR(50) NOT NULL,
-    downtime_duration VARCHAR(50) NOT NULL,
-    recorded_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+## 📦 Installation
 
-🚀 Installation
-1️⃣ Clone the Repository
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Subhaa9/Network-Monitoring-Web-App.git
+   cd Network-Monitoring-Web-App
+   ```
 
-git clone https://github.com/yourusername/NetworkMonitoringWebApp.git
-cd NetworkMonitoringWebApp
+2. **Set Up MySQL Database**
+   - Create the database using the SQL scripts provided above.
+   - Ensure MySQL is running and update the connection settings in your application.
 
-2️⃣ Set Up MySQL Database
+3. **Start the Web Application**
+   - Run the backend service or deploy it on a web server.
 
-    Create the database using the SQL scripts above.
-    Ensure MySQL is running and update connection settings in your application.
+---
 
-3️⃣ Start the Web Application
+## 📡 Usage
 
-Run the backend service or deploy it on a web server.
-📡 Usage
+- Add network entries with IP addresses, bandwidth, and real-time status.
+- Monitor ISP uptime and identify frequent failures.
+- View downtime logs to analyze network reliability.
 
-    Add network entries with IP addresses, bandwidth, and real-time status.
-    Monitor ISP uptime and identify frequent failures.
-    View downtime logs to analyze network reliability.
+---
 
+## 🤝 Contributing
 
-📜 License
+We welcome contributions! Follow these steps:
 
-This project is MIT licensed. Feel free to use, modify, and contribute.
+1. Fork this repository.
+2. Create a new branch for your feature (`feature-xyz`).
+3. Commit your changes and push them to your branch.
+4. Submit a Pull Request.
 
+---
 
-⭐ Contribute
+## 📜 License
 
-    Fork this repository
-    Create a new feature branch (feature-xyz)
-    Submit a Pull Request
+This project is licensed under the MIT License. Feel free to use, modify, and contribute to it.
 
-📌 If you find this useful, give it a ⭐ on GitHub! 🚀
+---
+
+## ⭐ Support Us
+
+If you find this project useful, consider giving it a ⭐ on GitHub! Your support helps us grow 🚀!
